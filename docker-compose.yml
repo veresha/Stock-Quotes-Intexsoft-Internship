@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  server:
+    build: .
+    container_name: exchange-server
+    entrypoint: ./entrypoint-server.sh
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/ExchangeRates
+    env_file:
+      - .env
+
+  worker:
+    build: .
+    container_name: exchange-worker
+    entrypoint: ./entrypoint-celery.sh
+    volumes:
+      - .:/usr/ExchangeRates
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: exchange-db
+    environment:
+      POSTGRES_DB: ${DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3.9.0-management-alpine
+    container_name: rabbit
+    environment:
+      RABBITMQ_BROKER: ${RABBITMQ_BROKER}
+    ports:
+      - "5672:5672"
+      - "15672:15672"

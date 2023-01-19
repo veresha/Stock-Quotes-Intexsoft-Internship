@@ -1,5 +1,6 @@
 import requests
-from os import getenv
 
-BASE_URL = getenv('BASE_URL', 'https://www.nbrb.by/api/exrates/currencies')
 
+def get_info(url):
+    response = requests.get(url=url)
+    print(response.text)
