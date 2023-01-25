@@ -1,5 +1,5 @@
 from celery import Celery
-from src.config import *
+from src.config import RABBITMQ_BROKER, RABBITMQ_BACKEND
 
 
 app = Celery(
@@ -12,8 +12,8 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'add-info-every-5-minutes': {
-        'task': 'tasks.add_info',
-        'schedule': 30.0
+        'task': 'src.celery_app.tasks.sync.add_info',
+        'schedule': 60.0
     },
 }
 app.conf.timezone = 'UTC'
