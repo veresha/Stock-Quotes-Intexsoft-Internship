@@ -1,3 +1,4 @@
 #! /bin/sh
 
-celery -A proj worker -B
+celery -A src.celery_app.main beat -l INFO
+

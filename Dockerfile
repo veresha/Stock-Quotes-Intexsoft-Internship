@@ -10,7 +10,7 @@ FROM base AS app
 
 WORKDIR /usr/ExchangeRates
 
-COPY requirements.txt /usr/ExchangeRates/
+COPY requirements.txt entrypoint-celery.sh /usr/ExchangeRates/
 RUN pip install -r requirements.txt
 
 COPY src /usr/ExchangeRates

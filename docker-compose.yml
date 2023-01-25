@@ -1,16 +1,5 @@
 version: "3.8"
 services:
-  server:
-    build: .
-    container_name: exchange-server
-    entrypoint: ./entrypoint-server.sh
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/usr/ExchangeRates
-    env_file:
-      - .env
-
   worker:
     build: .
     container_name: exchange-worker
@@ -23,18 +12,17 @@ services:
       - db
 
   db:
-    image: postgres
+    image: mongo:latest
     container_name: exchange-db
     environment:
-      POSTGRES_DB: ${DATABASE}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     ports:
-      - "5432:5432"
+      - "27017:27017"
 
   rabbitmq:
     image: rabbitmq:3.9.0-management-alpine
-    container_name: rabbit
+    container_name: rabbitmq
     environment:
       RABBITMQ_BROKER: ${RABBITMQ_BROKER}
     ports:

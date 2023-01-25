@@ -1,11 +1,11 @@
 import os
 
 
-BASE_URL = os.getenv('BASE_URL', 'https://www.nbrb.by/api/exrates/currencies')
-DB_USER = os.getenv('DB_USER', 'postgres')
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'password')
-HOST_ADDRESS = os.getenv('HOST_ADDRESS', '172.17.0.1:5432')
-DB_NAME = os.getenv('DB_NAME', 'exchange_table')
-DATABASE = os.getenv('DATABASE', 'postgres')
+BASE_URL = os.getenv('BASE_URL', 'https://finnhub.io/api/v1/quote')
+API_KEY = os.getenv('API_KEY', 'cf83dgqad3i8qmbtig60cf83dgqad3i8qmbtig6g')
+
+MONGO_INITDB_ROOT_USERNAME = os.getenv('MONGO_INITDB_ROOT_USERNAME', 'root')
+MONGO_INITDB_ROOT_PASSWORD = os.getenv('MONGO_INITDB_ROOT_PASSWORD', 'example')
+
 RABBITMQ_BROKER = os.getenv('RABBITMQ_BROKER', 'amqp://guest:guest@rabbitmq:5672/')
 RABBITMQ_BACKEND = os.getenv('RABBITMQ_BACKEND', 'rpc://')
