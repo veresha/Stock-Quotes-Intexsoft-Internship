@@ -1,9 +1,9 @@
 from celery import Celery
-from src.config import RABBITMQ_BROKER, RABBITMQ_BACKEND
+from src.config import RABBITMQ_BROKER, RABBITMQ_BACKEND, CELERY_BEAT_NAME
 
 
 app = Celery(
-    'beater',
+    CELERY_BEAT_NAME,
     broker=RABBITMQ_BROKER,
     backend=RABBITMQ_BACKEND,
     include="src.celery_app.tasks"

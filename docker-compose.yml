@@ -1,0 +1,24 @@
+version: "3.8"
+
+networks:
+  default:
+    name: "exchange"
+
+services:
+  worker:
+    build: .
+    container_name: exchange-worker
+    entrypoint: ./entrypoint-celery.sh
+    volumes:
+      - .:/usr/ExchangeRates
+    env_file:
+      - .env
+
+  rabbitmq:
+    image: rabbitmq:3.9.0-management-alpine
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_BROKER: ${RABBITMQ_BROKER}
+    ports:
+      - "5672:5672"
+      - "15672:15672"

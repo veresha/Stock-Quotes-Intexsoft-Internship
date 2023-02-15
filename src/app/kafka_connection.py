@@ -9,7 +9,6 @@ def connect_kafka_producer():
             bootstrap_servers=['kafka:9092'],
             value_serializer=lambda x: json.dumps(x).encode('utf-8')
         )
-
     except Exception as ex:
         print('Exception while connecting Kafka')
         print(str(ex))
