@@ -13,7 +13,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'add-info-every-5-minutes': {
         'task': 'src.celery_app.tasks.sync.add_info',
-        'schedule': 60.0
+        'schedule': 90.0
     },
 }
 app.conf.timezone = 'UTC'

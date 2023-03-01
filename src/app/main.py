@@ -6,7 +6,7 @@ from src.app.kafka_connection import publish_message
 
 
 def get_info():
-    companies_list = ('AAPL', 'IBM',)
+    companies_list = ('AAPL', 'AMZN', 'TSLA', 'MSFT', 'GOOG',)
     querystring = {'symbol': None, 'token': API_KEY}
 
     for company in companies_list:
@@ -25,6 +25,5 @@ def get_info():
             quote = {'company': company,
                      'quote': current_price,
                      'date': current_date}
-            print(quote)
 
             publish_message(quote)

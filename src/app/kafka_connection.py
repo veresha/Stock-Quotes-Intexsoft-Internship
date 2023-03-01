@@ -1,12 +1,13 @@
 import json
 from kafka import KafkaProducer
+from src.config import KAFKA_TOPIC_NAME, KAFKA_SERVER
 
 
 def connect_kafka_producer():
     _producer = None
     try:
         _producer = KafkaProducer(
-            bootstrap_servers=['kafka:9092'],
+            bootstrap_servers=[KAFKA_SERVER],
             value_serializer=lambda x: json.dumps(x).encode('utf-8')
         )
     except Exception as ex:
@@ -17,11 +18,9 @@ def connect_kafka_producer():
 
 
 def publish_message(data):
-    print('Start to publish')
     producer_instance = connect_kafka_producer()
-    topic_name = 'quotes'
     try:
-        producer_instance.send(topic_name, value=data)
+        producer_instance.send(KAFKA_TOPIC_NAME, value=data)
         producer_instance.flush()
         print('Message published successfully.')
     except Exception as ex:
