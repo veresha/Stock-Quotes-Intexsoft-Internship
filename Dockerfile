@@ -6,11 +6,13 @@ RUN apt-get update \
     && apt-get install make -y \
     && apt-get clean
 
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
 FROM base AS app
 
 WORKDIR /usr/ExchangeRates
 
-COPY requirements.txt entrypoint-celery.sh /usr/ExchangeRates/
-RUN pip install -r requirements.txt
+COPY entrypoint-celery.sh /usr/ExchangeRates/
 
 COPY src /usr/ExchangeRates

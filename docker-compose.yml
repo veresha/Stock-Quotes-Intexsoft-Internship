@@ -8,11 +8,11 @@ services:
   worker:
     build: .
     container_name: exchange-worker
+    env_file:
+      - .env
     entrypoint: ./entrypoint-celery.sh
     volumes:
       - .:/usr/ExchangeRates
-    env_file:
-      - .env
 
   rabbitmq:
     image: rabbitmq:3.9.0-management-alpine
