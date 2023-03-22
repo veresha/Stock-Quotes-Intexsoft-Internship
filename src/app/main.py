@@ -1,9 +1,7 @@
 import yfinance as yf
 from datetime import datetime
-from src.app import publish_message
-
-
-companies_tpl = ('AAPL', 'AMZN', 'TSLA', 'MSFT', 'GOOG',)
+from src.app.send_to_kafka import publish_message
+from src.config import companies_tpl
 
 
 def get_historical_data():
@@ -13,9 +11,6 @@ def get_historical_data():
         print(df.info())
         for _, row in df.iterrows():
             current_price = float(row['Close'])
-
-            # print(pd.to_datetime(row['Date']).strftime('%Y.%m.%d'))
-
             current_date = str(row['Date'])[:19]
             quote = {'company': company_name,
                      'quote': current_price,

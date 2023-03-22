@@ -11,3 +11,6 @@ KAFKA_TOPIC_NAME = os.getenv('KAFKA_TOPIC_NAME', 'quotes')
 RABBITMQ_BROKER = os.getenv('RABBITMQ_BROKER', 'amqp://guest:guest@rabbitmq:5672/')
 RABBITMQ_BACKEND = os.getenv('RABBITMQ_BACKEND', 'rpc://')
 TIMEZONE = os.getenv('TIMEZONE', 'UTC')
+PERIOD = 500
+
+companies_tpl = ('AAPL', 'AMZN', 'TSLA', 'MSFT', 'GOOG',)
